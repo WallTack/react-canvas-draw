@@ -60,7 +60,8 @@ export default class extends PureComponent {
     imgSrc: PropTypes.string,
     saveData: PropTypes.string,
     immediateLoading: PropTypes.bool,
-    hideInterface: PropTypes.bool
+    hideInterface: PropTypes.bool,
+    erase: PropTypes.bool
   };
 
   static defaultProps = {
@@ -79,7 +80,8 @@ export default class extends PureComponent {
     imgSrc: "",
     saveData: "",
     immediateLoading: false,
-    hideInterface: false
+    hideInterface: false,
+    erase: false
   };
 
   constructor(props) {
@@ -359,13 +361,16 @@ export default class extends PureComponent {
     this.lazy.update({ x, y });
     const isDisabled = !this.lazy.isEnabled();
 
+    // Add erase key to the first point in eraser lines
+    const point = this.props.erase ? { ...this.lazy.brush.toObject(), erase: true } : this.lazy.brush.toObject();
+
     if (
       (this.isPressing && !this.isDrawing) ||
       (isDisabled && this.isPressing)
     ) {
       // Start drawing and add point
       this.isDrawing = true;
-      this.points.push(this.lazy.brush.toObject());
+      this.points.push(point);
     }
 
     if (this.isDrawing) {
@@ -375,7 +380,7 @@ export default class extends PureComponent {
       // Draw current points
       this.drawPoints({
         points: this.points,
-        brushColor: this.props.brushColor,
+        brushColor: point.erase ? "erase" : this.props.brushColor,
         brushRadius: this.props.brushRadius
       });
     }
@@ -386,7 +391,8 @@ export default class extends PureComponent {
   drawPoints = ({ points, brushColor, brushRadius }) => {
     this.ctx.temp.lineJoin = "round";
     this.ctx.temp.lineCap = "round";
-    this.ctx.temp.strokeStyle = brushColor;
+    this.ctx.temp.strokeStyle = brushColor === "erase" ? "#dbb7bb" : brushColor;
+    this.ctx.drawing.globalCompositeOperation = brushColor === "erase" ? "destination-out" : "source-over";
 
     this.ctx.temp.clearRect(
       0,
@@ -419,6 +425,10 @@ export default class extends PureComponent {
 
   saveLine = ({ brushColor, brushRadius } = {}) => {
     if (this.points.length < 2) return;
+
+    if (this.points[0].erase) {
+      brushColor = "erase";
+    }
 
     // Save as new line
     this.lines.push({
@@ -515,9 +525,12 @@ export default class extends PureComponent {
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
+    // Color brush preview according to erase prop
+    const brushColor = this.props.erase ? "#dbb7bb" : this.props.brushColor;
+
     // Draw brush preview
     ctx.beginPath();
-    ctx.fillStyle = this.props.brushColor;
+    ctx.fillStyle = brushColor;
     ctx.arc(brush.x, brush.y, this.props.brushRadius, 0, Math.PI * 2, true);
     ctx.fill();
 
