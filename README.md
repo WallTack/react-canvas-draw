@@ -3,7 +3,7 @@
 ```
 import CanvasDraw from '<path_where_you_put_the_files>/index';
 ```
-Now you can use the canvas as you normally would with the main branch. For example, with all of the default props:
+Now you can use the canvas as you normally would. As an example, with all of the default props:
 ```
 CanvasDraw
 onChange: null,
