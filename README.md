@@ -1,3 +1,34 @@
+ <h1>Usage of this fork</h1> 
+ Download index.js and drawImage.js located in the [src](src/) folder. Place them in the src folder of your React app. Then, to initialize an instance of the canvas:
+ ```
+ import CanvasDraw from './<path_where_you_put_the_files>/index';
+ ```
+ Now you can use the canvas as you normally would with the main branch. For example, with all of the default props:
+ ```
+<CanvasDraw
+onChange: null,
+loadTimeOffset: 5,
+lazyRadius: 12,
+brushRadius: 10,
+brushColor: "#444",
+catenaryColor: "#0a0302",
+gridColor: "rgba(150,150,150,0.17)",
+backgroundColor: "#FFF",
+hideGrid: false,
+canvasWidth: 400,
+canvasHeight: 400,
+disabled: false,
+imgSrc: "",
+saveData: "",
+immediateLoading: false,
+hideInterface: false,
+erase: false
+/>
+ ```
+ Simply set the "erase" prop to ```true``` in order to start erasing.
+ 
+ <hr />
+
 <div align="center">
 <h1>React Canvas Draw</h1>
 </div>
