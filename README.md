@@ -1,5 +1,5 @@
 # Usage of this fork
- Download index.js and drawImage.js located in the [src](https://github.com/WallTack/react-canvas-draw/src/) folder. Place them somewhere in the src folder of your React app. Then, to initialize an instance of the canvas:
+ Download index.js and drawImage.js located in the [src](https://github.com/WallTack/react-canvas-draw/tree/develop/src) folder. Place them somewhere in the src folder of your React app. Then, to initialize an instance of the canvas:
 ```
 import CanvasDraw from './<path_where_you_put_the_files>/index';
 ```
