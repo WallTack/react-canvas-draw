@@ -1,8 +1,11 @@
- <h1>Usage of this fork</h1> 
+# Usage of this fork
  Download index.js and drawImage.js located in the [src](https://github.com/WallTack/react-canvas-draw/src/) folder. Place them somewhere in the src folder of your React app. Then, to initialize an instance of the canvas:
-`import CanvasDraw from './<path_where_you_put_the_files>/index';`
+```
+import CanvasDraw from './<path_where_you_put_the_files>/index';
+```
 Now you can use the canvas as you normally would with the main branch. For example, with all of the default props:
-`CanvasDraw
+```
+CanvasDraw
 onChange: null,
 loadTimeOffset: 5,
 lazyRadius: 12,
@@ -20,7 +23,8 @@ saveData: "",
 immediateLoading: false,
 hideInterface: false,
 erase: false
-/>`
+/>
+```
  Simply set the "erase" prop to `true` in order to start erasing.
  
  <hr />
